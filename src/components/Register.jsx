@@ -20,7 +20,8 @@ const Register = () => {
         }
         
         try {
-            const response = await axios.post("http://localhost:3000/register", { username, password });
+            const host = "https://auth-back-8njr.onrender.com";
+            const response = await axios.post(`${host}/register`, { username, password });
             console.log(response);
 if (response.status === 200) {
             toast.success("Account created successfully! You can now login");

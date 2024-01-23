@@ -13,7 +13,8 @@ const Login = () => {
         const username = userRef.current.value;
         const password = passRef.current.value;
         try {
-            const response = await axios.post("http://localhost:3000/login", { username, password });
+            const host = "https://auth-back-8njr.onrender.com";
+            const response = await axios.post(`${host}/login`, { username, password });
             console.log(response.data.token);
             const accessToken = response.data.token;
             localStorage.setItem("accessToken", accessToken);
