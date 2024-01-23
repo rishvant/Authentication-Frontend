@@ -14,29 +14,29 @@ const Register = () => {
         const password = passwordRef.current.value;
         const confirmPassword = confirmPasswordRef.current.value;
         e.preventDefault();
-   if (confirmPassword !== password) {
-        toast.error("Password does not match!");
-        return;
+        if (confirmPassword !== password) {
+            toast.error("Password does not match!");
+            return;
         }
         
         try {
-            const host = "https://auth-back-8njr.onrender.com";
-            const response = await axios.post(`${host}/register`, { username, password });
+            const response = await axios.post("http://localhost:3000/register", { username, password });
             console.log(response);
-if (response.status === 200) {
+            if (response.status === 200) {
             toast.success("Account created successfully! You can now login");
-        }
-        emailRef.current.value = "";
+            }
+            emailRef.current.value = "";
             passwordRef.current.value = "";
             confirmPasswordRef.current.value = "";
         }
         catch (err) {
             console.log("Error:", err);
             if (err.response && err.response.status === 409) {
-        toast.error("User already exists!");
-    } else {
-        toast.error("An unexpected error occurred.");
-    }
+                toast.error("User already exists!");
+            }
+            else {
+                toast.error("An unexpected error occurred.");
+            }
         }
     }
 
